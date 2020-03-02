@@ -51,6 +51,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:text="-"
+            android:onClick="displayQuantity"
             />
 
         <TextView
@@ -67,6 +68,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:text="+"
+            android:onClick="displayQuantity"
             />
     </LinearLayout>
 
@@ -94,5 +96,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="Order"
-        android:textAllCaps="true"/>
+        android:textAllCaps="true"
+        android:onClick="displaySummaryMsg"/>
 </LinearLayout>

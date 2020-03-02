@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
+
 public class MainActivity extends AppCompatActivity {
 
     int quantity=0;
@@ -27,16 +29,41 @@ public class MainActivity extends AppCompatActivity {
         plusBtn = (Button)findViewById(R.id.plus_btn);
         whippedChk = (CheckBox)findViewById(R.id.wCream_chkBox);
         orderMsg = (TextView)findViewById(R.id.orderMsg_text_view);
+        qNum = (TextView)findViewById(R.id.quantityNum_text_view);
     }
+
+    public void displaySummaryMsg(View view){
+        getView();
+        displaySummary(view);
+    }
+    public void displayQuantity(View view){
+        getView();
+        minOrPlus(view);
+    }
+    private void minOrPlus(View view){
+        int number;
+        if (view == minusBtn){
+            number = Integer.parseInt(qNum.getText().toString());
+            number--;
+            qNum.setText(String.valueOf(number));
+        }else if (view == plusBtn){
+            number = Integer.parseInt(qNum.getText().toString());
+            number++;
+            qNum.setText(String.valueOf(number));
+        }
+    }
+
     private void displaySummary(View view){
+        msgSummary="";
         String username = "Zoran Chen\n";
         msgSummary+="Name:"+username;
         msgSummary+="Add Whipped Cream?"+hasWhippedCream()+"\n";
         msgSummary+="Quantity:"+ qNum.getText().toString()+"\n";
-        msgSummary+="Total:";
+        msgSummary+="Total:"+ NumberFormat.getCurrencyInstance().format(calTotalPrice())+"\n";
         msgSummary+="Thank you!";
-
+        orderMsg.setText(msgSummary);
     }
+
 
     private Boolean hasWhippedCream() {
         if (whippedChk.isChecked() == true) {
@@ -47,4 +74,15 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+
+
+    /**calculate total price**/
+    private int calTotalPrice(){
+        int totalprice = 5*Integer.parseInt(qNum.getText().toString());
+        return totalprice;
+    }
+
+
+
 }
