@@ -105,7 +105,8 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textAllCaps="true"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        style="@style/HeaderTextStyle"/>
 
     <Button
         android:id="@+id/order_btn"

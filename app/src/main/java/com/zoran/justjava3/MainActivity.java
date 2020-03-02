@@ -2,6 +2,8 @@ package com.zoran.justjava3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,13 +35,27 @@ public class MainActivity extends AppCompatActivity {
         qNum = (TextView)findViewById(R.id.quantityNum_text_view);
     }
 
-    public void displaySummaryMsg(View view){
+    public void displaySummaryMsg(View view) {
         getView();
         displaySummary(view);
+        String priceMessage =String.valueOf(calTotalPrice());
+        composeEmail(priceMessage);
+
     }
+
     public void displayQuantity(View view){
         getView();
         minOrPlus(view);
+    }
+
+    public void composeEmail(String msg) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just java email");
+        intent.putExtra(Intent.EXTRA_TEXT,msg);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     private void minOrPlus(View view){
